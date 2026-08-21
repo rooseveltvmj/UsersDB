@@ -1,17 +1,18 @@
+import 'dotenv/config.js';
 import express from "express";
 import mysql from "mysql2/promise";
 
 const app = express();
-const port = 3000;
+const port = process.env.SERVER_PORT;
 
 app.use(express.json());
 
 const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: '1234',
-    database: 'userdb',
-    port: 3306,
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    port: process.env.DB_PORT,
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
