@@ -2,10 +2,14 @@ import 'dotenv/config.js';
 import express from "express";
 import mysql from "mysql2/promise";
 
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./swagger-output.json" with {type: 'json'};
+
 const app = express();
 const port = process.env.SERVER_PORT;
 
 app.use(express.json());
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
